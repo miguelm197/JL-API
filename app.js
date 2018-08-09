@@ -1,17 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
-const mongoose = require('mongoose');
+var express = require("express");
+var app = express();
+var bodyParser = require("body-parser");
+var methodOverride = require("method-override");
+var mongoose = require('mongoose');
 
-const app = express(); 
 
-var conS = "mongodb://root:toor700@ds018248.mlab.com:18248/juliodb?authSource=juliodb";
+var connectionString = "mongodb://root:toor@ds125113.mlab.com:25113/cifx2";
+// var conS = "mongodb://root:toor700@ds018248.mlab.com:18248/juliodb?authSource=juliodb";
 
-mongoose.connect(conS, function (err, res) {
+
+mongoose.connect(connectionString, function (err, res) {
     if (err) throw err;
     console.log('Conectado a la Base de Datos');
 });
-
 
 //ESTO PERMITE RECIBIR PETICIONES FUERA DE ESTE DOMINIO
 function perimitirCrossDomain(req, res, next) {
@@ -24,36 +25,24 @@ function perimitirCrossDomain(req, res, next) {
 }
 
 // Middlewares
-app.use(perimitirCrossDomain);
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
-
-
-// // Imports de Modelo y Controlador
-// var modelo = require('./models/mdl_tarea')(app, mongoose);
-// var CtrlTarea = require('./controllers/tareas');
-
-
+app.use(perimitirCrossDomain);
 
 // Ruteo
 var router = express.Router();
 
-
 router.get('/', function (req, res) {
-    res.send("Que tal sabandijas!");
-    // next();
+    res.send("Que tal sabandijassssssssssssssssssssss!");
 });
-
-
-
-
 
 app.use(router);
 
 // Start server
-app.listen(3000, function () {
-    console.log("Node server running on http://localhost:3000");
+var port = process.env.PORT || 3000
+app.listen(port, function () {
+    console.log("Node server running");
 });
+
+
