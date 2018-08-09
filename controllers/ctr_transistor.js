@@ -23,6 +23,18 @@ exports.consultaTransistores = function (req, res) {
 };
 
 
+//GET - Retorna  el transistor con id
+exports.consultaTransistorPorId = function (req, res) {
+    SCH_Transistor.findById(req.params.id, function (err, transistor) {
+        if (err) res.send(500, err.message);
+        console.log('GET /transistor/' + req.params.id);
+        res.status(200).jsonp(transistor);
+    });
+};
+
+
+
+
 //POST - Agrega una nuevo transistor en la Base de Datos
 exports.agregarTransistor = function (req, res) {
     console.log('POST');
