@@ -5,7 +5,6 @@ var methodOverride = require("method-override");
 var mongoose = require('mongoose');
 
 
-// var connectionString = "mongodb://root:toor@ds125113.mlab.com:25113/cifx2";
 var connectionString = "mongodb://root:toor700@ds018248.mlab.com:18248/juliodb";
 
 
@@ -30,12 +29,28 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(perimitirCrossDomain);
 
+
+// Imports de Modelo y Controlador
+require('./models/mdl_transistor')(app, mongoose);
+var ctrlTransistor = require('./controllers/ctr_transistor');
+
+
 // Ruteo
 var router = express.Router();
 
 router.get('/', function (req, res) {
-    res.send("Que tal sabandijasssssssssssssssssssssshhhhhhhhhhhhhh!");
+    res.send("Api REST JL_API!");
 });
+
+router.route('/transistores')
+    .get(ctrlTransistor.consultaTransistores)
+    .post(ctrlTransistor.agregarTransistor);
+
+
+
+
+
+
 
 app.use(router);
 
