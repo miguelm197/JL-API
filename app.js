@@ -24,7 +24,9 @@ function perimitirCrossDomain(req, res, next) {
 }
 
 // Middlewares
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(perimitirCrossDomain);
@@ -46,7 +48,9 @@ router.route('/transistores')
     .get(ctrlTransistor.consultaTransistores)
     .post(ctrlTransistor.agregarTransistor);
 
-
+router.route('/transistor/:id')
+    .get(ctrlTransistor.ctrlTransistor)
+    .put(ctrlTransistor.eliminarTransistor)
 
 
 
@@ -59,5 +63,3 @@ var port = process.env.PORT || 3000
 app.listen(port, function () {
     console.log("Node server running");
 });
-
-
