@@ -48,7 +48,7 @@ router.route('/transistores')
     .get(ctrlTransistor.consultaTransistores)
     .post(ctrlTransistor.agregarTransistor);
 
-router.route('/transistor/:id')
+router.route('/transistor')
     .get(ctrlTransistor.consultaTransistorPorId)
     .put(ctrlTransistor.actualizarTransistor)
     .delete(ctrlTransistor.eliminarTransistor)

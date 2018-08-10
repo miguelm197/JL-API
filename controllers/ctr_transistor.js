@@ -25,9 +25,11 @@ exports.consultaTransistores = function (req, res) {
 
 //GET - Retorna  el transistor con id
 exports.consultaTransistorPorId = function (req, res) {
-    SCH_Transistor.findById(req.params.id, function (err, transistor) {
-        if (err) res.send(500, err.message);
-        console.log('GET /transistor/' + req.params.id);
+    console.log(req.query.id)
+    SCH_Transistor.findById(req.query.id, function (err, transistor) {
+        if (err) return res.status(500).send(err.message);
+
+        console.log('GET /transistor/' + req.query.id);
         res.status(200).jsonp(transistor);
     });
 };
@@ -58,7 +60,7 @@ exports.agregarTransistor = function (req, res) {
 
 //PUT - Actualizar un transistor en la Base de Datos
 exports.actualizarTransistor = function (req, res) {
-    SCH_Transistor.findById(req.params.id, function (err, transistor) {
+    SCH_Transistor.findById(req.query.id, function (err, transistor) {
         transistor.codigo = req.body.codigo,
             transistor.stock = req.body.stock,
             transistor.descripcion = req.body.descripcion,
@@ -76,7 +78,7 @@ exports.actualizarTransistor = function (req, res) {
 
 //DELETE - Eliminar un transistor de la Base de Datos
 exports.eliminarTransistor = function (req, res) {
-    SCH_Transistor.findById(req.params.id, function (err, transistor) {
+    SCH_Transistor.findById(req.query.id, function (err, transistor) {
         transistor.remove(function (err) {
             if (err) return res.send(500, err.message);
 
