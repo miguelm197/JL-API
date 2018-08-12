@@ -5,7 +5,8 @@ var methodOverride = require("method-override");
 var mongoose = require('mongoose');
 
 
-var connectionString = "mongodb://root:toor700@ds018248.mlab.com:18248/juliodb";
+// var connectionString = "mongodb://root:toor700@ds018248.mlab.com:18248/juliodb";
+var connectionString = "mongodb://localhost:27017/juliodb";
 
 
 mongoose.connect(connectionString, function (err, res) {

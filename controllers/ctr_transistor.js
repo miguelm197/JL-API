@@ -79,12 +79,14 @@ exports.actualizarTransistor = function (req, res) {
 //DELETE - Eliminar un transistor de la Base de Datos
 exports.eliminarTransistor = function (req, res) {
     SCH_Transistor.findById(req.query.id, function (err, transistor) {
+        console.log(req.query.id)
+        console.log(transistor)
         transistor.remove(function (err) {
-            if (err) return res.send(500, err.message);
+            if (err) res.status(500).send(err.message);
 
             console.log('DELETE Se eliminó un transistor');
 
-            res.status(200);
+            res.status(200).jsonp(transistor);
         })
     });
 };
